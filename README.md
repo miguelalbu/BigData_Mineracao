@@ -1,82 +1,81 @@
-# 📊 Projeto de Big Data e Mineração de Dados
+# Análise de Comportamento de Clientes E-commerce
 
-## 🎯 Objetivo Geral
+## 📊 Descrição
+Projeto de mineração de dados focado na análise de comportamento de clientes de e-commerce, utilizando técnicas avançadas de descoberta de padrões.
 
-Este projeto tem como objetivo aplicar técnicas de mineração de dados com foco na **extração de regras de associação**, **clusterização** e **classificação supervisionada**, utilizando um dataset real do grupo de recomendação. O foco está na **descoberta de padrões ocultos**, **análise de relações entre atributos** e **geração de insights interpretáveis** a partir da estrutura dos dados.
+## 🎯 Objetivos
+- Descobrir padrões e estruturas ocultas nos dados
+- Extrair regras de associação significativas
+- Segmentar clientes através de clustering
+- Validar descobertas com classificação supervisionada
 
----
+## 🛠️ Tecnologias Utilizadas
+- Python 3.12
+- Pandas e NumPy
+- Scikit-learn
+- Matplotlib/Seaborn
+- MLxtend
 
-## ❓ Perguntas de Pesquisa
+## 📊 Etapas do Projeto
 
-1. Quais regras de associação podem ser extraídas dos dados transacionais?
-2. Existem segmentos distintos de comportamento entre os usuários?
-3. Quais atributos mais influenciam o agrupamento dos dados?
-4. As estruturas encontradas nas regras de associação coincidem com os agrupamentos realizados?
-5. Os modelos de classificação capturam os padrões descobertos anteriormente?
+### 1. Pré-processamento
+```python
+# Discretização de variáveis
+df['Gasto_Categ'] = pd.qcut(df['Total Spend'], q=3, labels=['Baixo', 'Médio', 'Alto'])
+df['Itens_Categ'] = pd.qcut(df['Items Purchased'], q=3, labels=['Pouco', 'Médio', 'Muito'])
+df['Avaliacao_Categ'] = pd.qcut(df['Average Rating'], q=3, labels=['Ruim', 'Regular', 'Boa'])
+```
 
----
+### 2. Análise de Regras de Associação
+- Algoritmo Apriori implementado
+- Parâmetros: min_support=0.01, min_confidence=0.6
+- Visualização das top 8 regras por lift
 
-## 🔧 Pré-Processamento e Engenharia de Atributos
+### 3. Segmentação (K-Means)
+- 3 clusters identificados
+- Visualização via PCA
+- Análise detalhada por cluster
 
-- Discretização de variáveis contínuas
-- Binarização de atributos categóricos
-- Conversão do dataset para formato transacional (cestas de itens)
-- Tratamento de valores ausentes
-- (Opcional) Redução de dimensionalidade via PCA
-- Exploração de distribuições para identificar variáveis relevantes
+### 4. Classificação Supervisionada
+- Árvore de Decisão
+- MLP (Multi-Layer Perceptron)
+- KNN (K-Nearest Neighbors)
+- Matrizes de confusão comparativas
 
----
 
-## 🔍 Mineração de Regras de Associação
+## 🚀 Como Executar
 
-- **Algoritmos Utilizados:** Apriori, [Outro algoritmo, ex: FP-Growth]
-- **Métricas analisadas:** Suporte, Confiança, Lift
-- **Visualizações:** 
-  - Tabelas com destaque visual das métricas
-  - Gráficos de rede e barras ordenadas
-- **Segmentações aplicadas:** [ex: por perfil de usuário, idade, região...]
-- **Insights:** Regras interpretáveis foram extraídas e comparadas entre diferentes segmentos.
-
----
-
-## 🧩 Clusterização (Segmentação Não Supervisionada)
-
-- **Algoritmo Utilizado:** KMeans
-- **Visualizações:** 
-  - PCA (componentes principais)
-  - Pairplots e scatterplots
-  - Árvores de Decisão para identificação de atributos relevantes por cluster
-- **Comparações com Regras de Associação:**
-  - Análise cruzada dos agrupamentos com as regras extraídas
-  - Identificação de atributos-chave recorrentes
-
----
-
-## 🤖 Classificação Supervisionada (Complementar)
-
-- **Algoritmos Utilizados:**
-  - Árvore de Decisão
-  - K-Nearest Neighbors (KNN)
-  - Multi-Layer Perceptron (MLP)
-- **Avaliação:**
-  - Matriz de confusão
-  - Acurácia, precisão, recall e F1-score
-- **Objetivo:** Validar os padrões descobertos com técnicas supervisionadas
-
----
-
-## 📈 Resultados e Discussão
-
-- Descoberta de padrões interpretáveis relevantes para o domínio
-- Agrupamentos coerentes com os segmentos definidos
-- Confirmação dos padrões pelas métricas dos classificadores
-- Discussão crítica sobre regras redundantes, discrepâncias e padrões inesperados
-
----
-
-## 🛠 Reprodutibilidade
-
-Este projeto pode ser executado diretamente via Google Colab ou ambiente local com as bibliotecas:
-
+1. Clone o repositório:
 ```bash
-pip install pandas numpy matplotlib seaborn mlxtend scikit-learn
+git clone
+cd BigData_Mineracao
+```
+
+2. Instale as dependências:
+```bash
+pip install
+```
+
+3. Execute a análise:
+```bash
+python analysis.py
+```
+
+## 📁 Estrutura do Projeto
+```
+BigData_Mineracao/
+│   analysis.py
+│   README.md
+│   
+└───data
+        E-commerce Customer Behavior - Sheet1.csv
+
+```
+
+## 📝 Notas
+- Dataset contém informações de comportamento de clientes
+- Foco em descoberta de padrões e não em previsão
+- Resultados validados por múltiplas técnicas
+
+---
+Projeto desenvolvido para a disciplina de Big Data e Mineração de Dados
