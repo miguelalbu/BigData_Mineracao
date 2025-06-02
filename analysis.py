@@ -28,7 +28,7 @@ df = pd.read_csv("data/E-commerce Customer Behavior - Sheet1.csv")
 print(df.head())
 
 # Pré-processamento e discretização
-# Criando categorias a partir de variáveis contínuas
+# Discretização de variáveis Contínuas
 df['Gasto_Categ'] = pd.qcut(df['Total Spend'], q=3, labels=['Baixo', 'Médio', 'Alto'])
 df['Itens_Categ'] = pd.qcut(df['Items Purchased'], q=3, labels=['Pouco', 'Médio', 'Muito'])
 df['Avaliacao_Categ'] = pd.qcut(df['Average Rating'], q=3, labels=['Ruim', 'Regular', 'Boa'])
@@ -103,9 +103,9 @@ plt.show()
 df_bool = df_bin.loc[:, df_bin.apply(lambda col: set(col.unique()).issubset({0,1}))]
 
 # Geração de itemsets frequentes
-frequentes = apriori(df_bool, min_support=0.01, use_colnames=True)
+frequentes = apriori(df_bool, min_support=0.005, use_colnames=True)
 if not frequentes.empty:
-    regras = association_rules(frequentes, metric="confidence", min_threshold=0.6)
+    regras = association_rules(frequentes, metric="confidence", min_threshold=0.5)
     regras['regra'] = regras['antecedents'].astype(str) + ' => ' + regras['consequents'].astype(str)
 
     top_lift = regras.sort_values(by='lift', ascending=False).head(8)
